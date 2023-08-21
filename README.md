@@ -15,18 +15,18 @@ This program allows you to rename image files (JPEG, PNG, GIF, NEF RAW) and .MOV
 
    ```bash
    pip install Pillow exifread
-2. Download the `rename_photos.py` file and place it in the directory where your photos and movie files are located.
+2. Download the `rename_files.py` file and place it in the directory where your photos and movie files are located.
 
 ## Usage
 1. Open the Terminal.
 
-2. Navigate to the directory containing the `rename_photos.py` file and your photos/movies files:
+2. Navigate to the directory containing the `rename_files.py` file and your photos/movies files:
 
     ```bash
     cd path/to/your/directory
 3. Run the program using the following command:
     ```bash
-    python3 rename_photos.py
+    python3 rename_files.py
 4. The program will automatically rename the files in the folder based on their creation dates.
 
 ## Process Overview
