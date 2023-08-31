@@ -47,7 +47,7 @@ def get_nef_date_taken_from_photos(image_path):
     return None
 
 
-def rename_files(source_folder):
+def rename_files(source_folder, option):
     index = 1  # Add custom index
     files_to_rename_list = []
 
@@ -66,19 +66,37 @@ def rename_files(source_folder):
 
     sorted_photos = sorted(files_to_rename_list, key=lambda x: x[1])
 
-    for file_path, _ in sorted_photos:
-        extension = os.path.splitext(file_path)[1]
-        new_name = (
-            f"file_{index:04d}" + extension)  # Change "file" to your custom file name
-        new_path = os.path.join(source_folder, new_name)
-        os.rename(file_path, new_path)
-        print(f"Renamed {os.path.basename(file_path)} to {new_name}")
-        index += 1
+    if option == 1:
+        for file_path, _ in sorted_photos:
+            extension = os.path.splitext(file_path)[1]
+            new_name = (
+                f"file_{index:04d}" + extension  # Change "file" to your custom file name
+            )
+            new_path = os.path.join(source_folder, new_name)
+            os.rename(file_path, new_path)
+            print(f"Renamed {os.path.basename(file_path)} to {new_name}")
+            index += 1
+    elif option == 2:
+        for file_path, date_taken in sorted_photos:
+            extension = os.path.splitext(file_path)[1]
+            formatted_date = date_taken.strftime("%d-%m-%Y_%H-%M-%S")
+            new_name = f"{formatted_date}{extension}"
+            new_path = os.path.join(source_folder, new_name)
+            os.rename(file_path, new_path)
+            print(f"Renamed {os.path.basename(file_path)} to {new_name}")
+    else:
+        print("\nWrong number, try again")
 
 
 def main():
+    print("\nEXIF Renamer\n---")
+    print(
+        "Which renaming option do you choose:\n\n1. file_0001, file_0002, file_0003...\n2. EXIF Date Renaming\n"
+    )
+    option = int(input("Please choose your number: "))
+
     source_folder = "."  # Add a path to the files you want to rename
-    rename_files(source_folder)
+    rename_files(source_folder, option)
 
 
 if __name__ == "__main__":
